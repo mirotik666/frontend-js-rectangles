@@ -1,41 +1,41 @@
 ﻿'use strict';
 
-function areIntersected(rectangleA, rectangleB) {
 
-    function getBottomSide(rectangle) {
-        return rectangle.top + rectangle.height;
-    }
+function getBottomSide(rectangle) {
+	return rectangle.top + rectangle.height;
+}
 
-    function getRightSide(rectangle) {
-        return rectangle.left + rectangle.width;
-    }
+function getRightSide(rectangle) {
+	return rectangle.left + rectangle.width;
+}
 
-    let intersectedAxisX;
-    let intersectedAxisY;
+function areIntersected(rectangleFirst, rectangleSecond) {
 
-    if (rectangleA.top < getBottomSide(rectangleB) && getBottomSide(rectangleA) > rectangleB.top) {
-        intersectedAxisY = true;
-    }
-    if (rectangleA.left < getRightSide(rectangleB) && getRightSide(rectangleA) > rectangleB.left) {
-        intersectedAxisX = true;
-    }
-    if (intersectedAxisX & intersectedAxisY) {
-        return true;
-    }
+	let intersectedAxisX;
+	let intersectedAxisY;
 
-    return false;
+	if (rectangleFirst.top < getBottomSide(rectangleSecond) && getBottomSide(rectangleFirst) > rectangleSecond.top) {
+		intersectedAxisY = true;
+	}
+	if (rectangleFirst.left < getRightSide(rectangleSecond) && getRightSide(rectangleFirst) > rectangleSecond.left) {
+		intersectedAxisX = true;
+	}
+	if (intersectedAxisX & intersectedAxisY) {
+		return true;
+	}
+
+	return false;
 }
 
 
-
-function filterVisible(rectangleA, array) {
-    return array.filter(function(element) {
-        if (element.width !== 0 && element.height !== 0) {
-            return areIntersected(rectangleA, element);
-        } else {
-            return false;
-        }
-    });
+function filterVisible(rectangleFirst, array) {
+	return array.filter(function(element) {
+		if (element.width !== 0 && element.height !== 0) {
+			return areIntersected(rectangleFirst, element);
+		} else {
+			return false;
+		}
+	});
 }
 
 console.log(filterVisible);
